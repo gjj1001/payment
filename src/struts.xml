@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.action.extension" value="do"/>
+    <constant name="struts.ui.theme" value="simple"/>
+    <constant name="struts.i18n.reload" value="true"/>
+    <constant name="struts.locale" value="zh-CN"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.multipart.saveDir" value="/image"/>
+    <constant name="struts.serve.static.browserCache" value="false"/>
+
+    <package name="product" namespace="/control/product/type" extends="struts-default">
+
+        <interceptors>
+            <interceptor name="setcode" class="com.itcast.web.interceptor.SetcodeInterceptor"/>
+            <interceptor-stack name="setEncoding">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="setcode"/>
+            </interceptor-stack>
+        </interceptors>
+		<!-- <default-interceptor-ref name="setEncoding"/> -->
+        <global-results>
+            <result name="success">/WEB-INF/page/share/message.jsp</result>
+        </global-results>
+		<!-- <default-action-ref name="index" />
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings> -->
+		<!-- 产品类别显示 -->
+        <action name="list" class="productTypeAction">
+            <result name="list">/WEB-INF/page/test.jsp</result>
+        </action>
+        <!-- 产品类别管理 -->
+        <action name="add_*" class="productTypeManageAction" method="{1}">
+            <result name="add">/WEB-INF/page/addProductType.jsp</result>
+            <result name="edit">/WEB-INF/page/editProductType.jsp</result>
+            <result name="query">/WEB-INF/page/queryProductType.jsp</result>
+        </action>
+    </package>
+
+    <!-- <include file="example.xml"/> -->
+
+    <!-- Add packages here -->
+	<package name="brand" namespace="/control/brand/type" extends="struts-default">
+	    <global-results>
+	        <result name="success">/WEB-INF/page/share/message.jsp</result>
+	    </global-results>
+	    <!-- 产品品牌分页显示 -->
+	    <action name="brandlist" class="brandAction">
+	        <result name="brandlist">/WEB-INF/page/brandlist.jsp</result>
+	    </action>
+	    <!-- 产品品牌管理 -->
+	    <action name="add_*" class="brandManagerAction" method="{1}">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg,image/jpg,application/msword,text/plain</param>
+                <param name="maximumSize">2000000000</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <result name="add">/WEB-INF/page/addBrand.jsp</result>
+            <result name="edit">/WEB-INF/page/editBrand.jsp</result>
+            <result name="query">/WEB-INF/page/queryBrand.jsp</result>
+        </action>
+	</package>
+</struts>
