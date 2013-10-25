@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.casit.bean.product.PayOrder;
 import com.casit.service.base.DaoSupport;
 import com.casit.service.product.OrderService;
 @Service @Transactional

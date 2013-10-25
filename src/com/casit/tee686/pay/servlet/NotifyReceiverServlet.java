@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
+
 import com.casit.bean.product.PayOrder;
 import com.casit.service.product.OrderService;
 import com.casit.tee686.pay.utils.GenerateMerSign;
@@ -21,7 +23,7 @@ import com.chinaums.pay.api.impl.UMSPayServiceImpl;
 /**
  * Servlet implementation class NotifyReceiverServlet
  */
-@WebServlet("/servlet/NotifyReceiverServlet") //@Controller @Scope("prototype")
+@Component //@Controller @Scope("prototype")
 public class NotifyReceiverServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UMSPayServiceImpl umsImpl = new UMSPayServiceImpl();
