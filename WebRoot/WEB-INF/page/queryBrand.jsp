@@ -9,8 +9,8 @@
 </head>
 <body>
 
-<form action="brandlist.do" method="post">
-类别名称：<input type="text" name="name"><br/>
+<form action="userlist.do" method="post">
+用户名称：<input type="text" name="name"><br/>
 <s:hidden name="query" value="true"/>
 <input type="submit" value="查询" >
 </form>
@@ -21,12 +21,7 @@
 <s:hidden name="typeId" value="#parameters.typeId"/>
 <input type="submit" value="修改" >
 </form> --%>
-前request:<s:property value="#request.parentid" escapeHtml="false"/><br/>
-<s:set name="parentid" value="" scope="parameters"></s:set>
-后request:<s:property value="#request.parentid" escapeHtml="false"/><br/>
-session:<s:property value="#session.parentid"/><br/>
-application:<s:property value="#application.parentid"/><br/>
-parameters:<s:property value="#parameters.parentid"/><br/>
+
 
 </body>
 </html>

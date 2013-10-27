@@ -48,15 +48,15 @@
     <!-- <include file="example.xml"/> -->
 
     <!-- Add packages here -->
-	<package name="brand" namespace="/control/brand/type" extends="struts-default">
+	<package name="user" namespace="/control/user" extends="struts-default">
 	    <global-results>
 	        <result name="success">/WEB-INF/page/share/message.jsp</result>
 	    </global-results>
-	    <!-- 产品品牌分页显示 -->
-	    <action name="brandlist" class="brandAction">
-	        <result name="brandlist">/WEB-INF/page/brandlist.jsp</result>
+	    <!-- 用户分页显示 -->
+	    <action name="userlist" class="brandAction">
+	        <result name="userlist">/WEB-INF/page/brandlist.jsp</result>
 	    </action>
-	    <!-- 产品品牌管理 -->
+	    <!-- 用户管理 -->
 	    <action name="add_*" class="brandManagerAction" method="{1}">
             <interceptor-ref name="fileUpload">
                 <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg,image/jpg,application/msword,text/plain</param>

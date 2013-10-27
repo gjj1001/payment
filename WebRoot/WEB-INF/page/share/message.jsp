@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加成功</title>
+<title>操作成功</title>
 </head>
 <body>
 <h1><font color="#009900">${message }</font></h1>
 <input type="button" onclick="javascript:window.location.href='${url}'" value="确定"/>
-${name}<hr/> ${note}<br/>
-前request:<s:property value="#request.parentid" /><br/>
+<hr/> <%-- ${note}<br/> --%>
+<%-- 前request:<s:property value="#request.parentid" /><br/>
 <s:set name="parentid" value="" scope="request"></s:set>
-后request:<s:property value="#request.parentid" /><br/>
+后request:<s:property value="#request.parentid" /><br/> --%>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>修改品牌类别</title>
+<title>修改用户</title>
 </head>
 <body>
 
@@ -17,18 +17,20 @@
 <input type="submit" value="添加" >
 </form> --%>
 <form action="add_edit.do" method="post" enctype="multipart/form-data">
-品牌名称：<s:textfield name="name" value="%{name}"/><br/>
-品牌图片：<s:file name="upload" theme="simple"/><br/>
-<img src="${logopath }" width="100"/>
-<s:hidden name="code" value="%{#parameters.code}"/>
+用户名称：<s:textfield name="name" value="%{name}"/><br/>
+用户积分：<s:textfield name="tm" value="%{tm}"/><br/>
+用户功勋：<s:textfield name="tp" value="%{tp}"/><br/>
+<%-- 用户头像：<s:file name="upload" theme="simple"/><br/>
+<img src="${logopath }" width="100"/> --%>
+<s:hidden name="userid" value="%{#parameters.userid}"/>
 <input type="submit" value="修改" >
 </form>
-前request:<s:property value="#request.parentid" escapeHtml="false"/><br/>
+<%-- 前request:<s:property value="#request.parentid" escapeHtml="false"/><br/>
 <s:set name="parentid" value="" scope="request"></s:set>
 后request:<s:property value="#request.parentid" escapeHtml="false"/><br/>
 session:<s:property value="#session.parentid"/><br/>
 application:<s:property value="#application.parentid"/><br/>
-parameters:<s:property value="#parameters.parentid"/><br/>
+parameters:<s:property value="#parameters.parentid"/><br/> --%>
 
 </body>
 </html>

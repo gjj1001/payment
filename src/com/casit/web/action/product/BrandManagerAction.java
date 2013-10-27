@@ -15,7 +15,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.casit.bean.product.Brand;
+import com.casit.bean.product.UserInfo;
 import com.casit.service.product.BrandService;
+import com.casit.service.product.UserService;
 import com.casit.util.UrlUtil;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
@@ -26,14 +28,32 @@ public class BrandManagerAction extends ActionSupport {
 
 	private static final long serialVersionUID = 9222222194686878662L;
 	@Resource
-	private BrandService brandService;
+	private UserService us;
 	private String name;
-	private String code;
+	private Integer userid;
 	private String logopath;
+	private Integer tm;
+	private Integer tp;
 	private File upload;
 	private String uploadFileName;
 	private String uploadContentType;
-	
+		
+	public Integer getTm() {
+		return tm;
+	}
+
+	public void setTm(Integer tm) {
+		this.tm = tm;
+	}
+
+	public Integer getTp() {
+		return tp;
+	}
+
+	public void setTp(Integer tp) {
+		this.tp = tp;
+	}
+
 	public String getLogopath() {
 		return logopath;
 	}
@@ -42,12 +62,12 @@ public class BrandManagerAction extends ActionSupport {
 		this.logopath = logopath;
 	}
 
-	public String getCode() {
-		return code;
+	public Integer getUserid() {
+		return userid;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setUserid(Integer userid) {
+		this.userid = userid;
 	}
 
 	public String getUploadFileName() {
@@ -88,12 +108,12 @@ public class BrandManagerAction extends ActionSupport {
 	}
 	
 	public String add() throws Exception {
-		Brand brand = new Brand();
-		brand.setName(name);
-		if(upload!=null&&upload.length()>0) {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setUsername(name);
+		/*if(upload!=null&&upload.length()>0) {
 			SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd/HH");
 			String timestamp = date.format(new Date());
-			String logopathDirName = "/image/brand/" + timestamp;//获得相对保存路径
+			String logopathDirName = "/image/brand/" + timestamp;//锟斤拷锟斤拷锟皆憋拷锟斤拷路锟斤拷
 			String realLogopathDir = ServletActionContext.getServletContext().getRealPath(logopathDirName);
 			String imageName = UUID.randomUUID().toString().substring(UUID.randomUUID().toString().lastIndexOf("-")+1);
 			//String ext = upload.getAbsolutePath().substring(upload.getAbsolutePath().lastIndexOf("."));
@@ -110,28 +130,31 @@ public class BrandManagerAction extends ActionSupport {
 			}
 			out.close();
 			String logopath = realLogopathDir +"/" + image;
-			brand.setLogopath(logopath);
-		}
-		brandService.save(brand);
-		ActionContext.getContext().put("message", "添加品牌类别成功");
-		ActionContext.getContext().put("url", UrlUtil.readUrl("brandlist"));
+			userInfo.setLogopath(logopath);
+		}*/
+		us.save(userInfo);
+		ActionContext.getContext().put("message", "鎿嶄綔鎴愬姛");
+		ActionContext.getContext().put("url", UrlUtil.readUrl("userlist"));
 		return Action.SUCCESS;
 	}
 	
 	public String editUi() {
-		Brand brand = brandService.find(Brand.class, code);
-		name = brand.getName();
-		logopath = brand.getLogopath();
+		UserInfo user = us.find(UserInfo.class, userid);
+		name = user.getUsername();
+		tm = user.getTm();
+		tp = user.getTp();
 		return "edit";
 	}
 	
 	public String edit() throws IOException {
-		Brand brand = brandService.find(Brand.class, code);
-		brand.setName(name);
-		if(upload!=null&&upload.length()>0) {
+		UserInfo userInfo = us.find(UserInfo.class, userid);
+		userInfo.setUsername(name);
+		userInfo.setTm(tm);
+		userInfo.setTp(tp);
+		/*if(upload!=null&&upload.length()>0) {
 			SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd/HH");
 			String timestamp = date.format(new Date());
-			String logopathDirName = "/image/brand/" + timestamp;//获得相对保存路径
+			String logopathDirName = "/image/brand/" + timestamp;//锟斤拷锟斤拷锟皆憋拷锟斤拷路锟斤拷
 			String realLogopathDir = ServletActionContext.getServletContext().getRealPath(logopathDirName);
 			String imageName = UUID.randomUUID().toString().substring(UUID.randomUUID().toString().lastIndexOf("-")+1);
 			//String ext = upload.getAbsolutePath().substring(upload.getAbsolutePath().lastIndexOf("."));
@@ -149,10 +172,10 @@ public class BrandManagerAction extends ActionSupport {
 			out.close();
 			String logopath = realLogopathDir +"/" + image;
 			brand.setLogopath(logopath);
-		}
-		brandService.update(brand);
-		ActionContext.getContext().put("message", "修改品牌类别成功");
-		ActionContext.getContext().put("url", UrlUtil.readUrl("brandlist"));
+		}*/
+		us.update(userInfo);
+		ActionContext.getContext().put("message", "鎿嶄綔鎴愬姛");
+		ActionContext.getContext().put("url", UrlUtil.readUrl("userlist"));
 		return Action.SUCCESS;
 	}
 	

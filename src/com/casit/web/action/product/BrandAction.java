@@ -10,16 +10,18 @@ import org.springframework.stereotype.Controller;
 
 import com.casit.bean.QueryResult;
 import com.casit.bean.product.Brand;
+import com.casit.bean.product.UserInfo;
 import com.casit.service.product.BrandService;
+import com.casit.service.product.UserService;
 import com.opensymphony.xwork2.ActionContext;
 
 @Controller @Scope("prototype")
 public class BrandAction {
 	@Resource
-	private BrandService brandService;
+	private UserService us;
 	private int firstIndex = 0;
 	private int maxResult = 10;
-	private QueryResult<Brand> qr;
+	private QueryResult<UserInfo> qr;
 	private boolean query;
 	private String name;
 	
@@ -49,19 +51,18 @@ public class BrandAction {
 
 	public String execute() throws Exception {
 		int pageIndex = firstIndex*maxResult;
-		StringBuffer jpql = new StringBuffer("o.visible=?1");
-		List<Object> params = new ArrayList<Object>();
-		params.add(true);
+		StringBuffer jpql = new StringBuffer("");
+		List<Object> params = new ArrayList<Object>();		
 		if(true==query) {
-			jpql.append(" and o.name like ?"+(params.size()+1));
+			jpql.append("o.username like ?"+(params.size()+1));
 			params.add("%"+name+"%");
 		}
-		qr = brandService.getScrollData(Brand.class, pageIndex, maxResult, jpql.toString(), params.toArray());
-		List<Brand> brand = qr.getResultList();
+		qr = us.getScrollData(UserInfo.class, pageIndex, maxResult, jpql.toString(), params.toArray());
+		List<UserInfo> userInfos = qr.getResultList();
 		int totalPage = (int) (qr.getTotalNumber()%maxResult==0? qr.getTotalNumber()/maxResult: qr.getTotalNumber()/maxResult+1);
-		ActionContext.getContext().put("brand", brand);		
+		ActionContext.getContext().put("user", userInfos);		
 		ActionContext.getContext().put("currentPage", firstIndex);
 		ActionContext.getContext().put("totalPage", totalPage);
-		return "brandlist";
+		return "userlist";
 	}
 }

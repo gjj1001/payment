@@ -35,7 +35,7 @@ public class OrderTest {
 	@Test
 	public void testSave() {		
 		SimpleDateFormat formattime = new SimpleDateFormat("HH:mm:ss");
-		SimpleDateFormat formatdate = new SimpleDateFormat("yy-MM-dd");		
+		SimpleDateFormat formatdate = new SimpleDateFormat("yyyyMMdd");		
 		for(int i=0; i<10; i++) {
 			PayOrder order = new PayOrder();
 			String time = formattime.format(new Date());
