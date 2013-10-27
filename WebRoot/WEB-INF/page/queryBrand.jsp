@@ -5,12 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>查询产品品牌</title>
+<title>查询用户</title>
 </head>
 <body>
 
 <form action="userlist.do" method="post">
 用户名称：<input type="text" name="name"><br/>
+用户手机号：<input type="text" name="mobile"><br/>
 <s:hidden name="query" value="true"/>
 <input type="submit" value="查询" >
 </form>

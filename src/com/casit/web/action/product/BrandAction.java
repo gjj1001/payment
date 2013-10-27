@@ -24,7 +24,16 @@ public class BrandAction {
 	private QueryResult<UserInfo> qr;
 	private boolean query;
 	private String name;
+	private String mobile;
 	
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	public boolean isQuery() {
 		return query;
 	}
@@ -53,9 +62,16 @@ public class BrandAction {
 		int pageIndex = firstIndex*maxResult;
 		StringBuffer jpql = new StringBuffer("");
 		List<Object> params = new ArrayList<Object>();		
-		if(true==query) {
+		if(true==query && !name.equals("") && mobile.equals("")) {
 			jpql.append("o.username like ?"+(params.size()+1));
 			params.add("%"+name+"%");
+		} else if(true==query && !mobile.equals("") && name.equals("")) {
+			jpql.append("o.mobile like ?"+(params.size()+1));
+			params.add("%"+mobile+"%");
+		} else if(true==query && !name.equals("") && !mobile.equals("")) {
+			jpql.append("o.username like ?"+(params.size()+1)+" and o.mobile like ?"+(params.size()+2));
+			params.add("%"+name+"%");
+			params.add("%"+mobile+"%");
 		}
 		qr = us.getScrollData(UserInfo.class, pageIndex, maxResult, jpql.toString(), params.toArray());
 		List<UserInfo> userInfos = qr.getResultList();
