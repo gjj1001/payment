@@ -52,7 +52,7 @@ public abstract class DaoSupport implements DAO {
 	public <T> QueryResult<T> getScrollData(Class<T> entityClass,
 			int firstIndex, int maxResult, LinkedHashMap<String, String> orderby) {
 		return getScrollData(entityClass, firstIndex, maxResult,
-				null, null, orderby);
+				"", null, orderby);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public abstract class DaoSupport implements DAO {
 	public <T> QueryResult<T> getScrollData(Class<T> entityClass,
 			int firstIndex, int maxResult) {
 		return getScrollData(entityClass, firstIndex, maxResult,
-				null, null, null);
+				"", null, null);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public abstract class DaoSupport implements DAO {
 		return qr;
 	}
 	
-	/**¸øÎ»ÖÃ²ÎÊý¸³Öµ
+	/**ï¿½ï¿½Î»ï¿½Ã²ï¿½ï¿½ï¿½Öµ
 	 * @param query
 	 * @param queryParams
 	 */
@@ -114,7 +114,7 @@ public abstract class DaoSupport implements DAO {
 		}		
 	}
 
-	/**×é×°order byÓï¾ä
+	/**ï¿½ï¿½×°order byï¿½ï¿½ï¿½
 	 * @param orderby
 	 * @return
 	 */
@@ -131,7 +131,7 @@ public abstract class DaoSupport implements DAO {
 		
 	}
 	
-	/**»ñµÃÊµÌåÃû³Æ
+	/**ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param entityClass
 	 * @return
 	 */

@@ -4,9 +4,10 @@ import java.util.List;
 
 /**
  * @author Jason
+ * 
+ * @param <T>
  * List<T> resultList
  * Long totalNumber
- * @param <T>
  */
 public class QueryResult<T> {
 	private List<T> resultList;

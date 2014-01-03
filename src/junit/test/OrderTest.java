@@ -3,33 +3,47 @@ package junit.test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Query;
+
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.casit.bean.product.PayOrder;
-import com.casit.bean.product.UserInfo;
-import com.casit.service.product.OrderService;
-import com.casit.service.product.UserService;
+import com.casit.bean.entity.Comment;
+import com.casit.bean.entity.PayOrder;
+import com.casit.bean.entity.UserInfo;
+import com.casit.service.CollectionService;
+import com.casit.service.CommentService;
+import com.casit.service.OrderService;
+import com.casit.service.UserService;
 
 public class OrderTest {
 
 	private static ApplicationContext cxt;
 	private static OrderService os;
 	private static UserService us;
+	private static CommentService cs;
+	private static CollectionService cols;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		cxt = new ClassPathXmlApplicationContext("beans.xml");
 		os = (OrderService) cxt.getBean("orderServiceBean");
 		us = (UserService) cxt.getBean("userServiceBean");
+		cs = (CommentService) cxt.getBean("commentServiceBean");
+		cols = (CollectionService) cxt.getBean("collectionServiceBean");
 	}
 
 	@Test
@@ -77,6 +91,7 @@ public class OrderTest {
 	
 	@Test
 	public void testJson() throws IOException {
+		
 		URL url = new URL("http://localhost:19840/payment/UserInfoServlet?uname=xiner");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		StringBuffer json = new StringBuffer();
@@ -102,5 +117,23 @@ public class OrderTest {
 	public void testCreate() {
 		us.save(new UserInfo("+8615680557316", "高", "123", "MAN",
 				"19841001", "四川", "成都", "20131018", "QQ"));
+	}
+	
+	@Test
+	public void testFind() {
+		List<Comment> comments = new ArrayList<Comment>();
+//		comments = cs.find("content", "好");
+		comments = cs.find("pubtime", "2013-12-26,11:46:32");
+		System.out.println(comments.size());
+		
+		for(int i=0; i<comments.size(); i++) {
+			System.out.println(comments.get(i));
+		}			
+		
+	}
+	
+	@Test
+	public void deleteCollection() {
+		cols.delete("2013-12-27,11:42:10");
 	}
 }
