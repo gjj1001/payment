@@ -43,10 +43,10 @@ public class UserCollectionServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");	
 		String uname = request.getParameter("uname");
 		String sendtime = request.getParameter("sendtime");
-		System.out.println("username:"+uname);
 		System.out.println("sendtime:"+sendtime);
 		if(uname!=null) {
 			uname = new String(uname.getBytes("iso-8859-1"),"utf-8");
+			System.out.println("username:"+uname);
 			List<Collection> list = cs.find(uname);
 			JsonFactory factory = new JsonFactory();
 			PrintWriter out = response.getWriter();

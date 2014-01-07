@@ -21,4 +21,11 @@ public class CommentServiceBean extends DaoSupport implements CommentService {
 		List<Comment> comments = query.getResultList();
 		return comments;
 	}
+	
+	@Override
+	public void delete(String comtime) {
+		Query query = em.createQuery("delete from Comment o where o.comtime=?1");
+		query.setParameter(1, comtime);
+		query.executeUpdate();
+	}
 }

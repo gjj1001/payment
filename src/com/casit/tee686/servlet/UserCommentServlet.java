@@ -40,6 +40,7 @@ public class UserCommentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pubtime = request.getParameter("pubtime");
+		String comtime = request.getParameter("comtime");
 		StringBuffer data = new StringBuffer();
 		byte[] buffer = new byte[1024];
 		while(request.getInputStream().read(buffer) != -1) {
@@ -49,26 +50,9 @@ public class UserCommentServlet extends HttpServlet {
 		System.out.println(pubtime);
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
-		if(pubtime==null) { 
-			System.out.println("发表评论"); 
-//			List<Comment> comments = new ArrayList<Comment>();
-			Comment value = new ObjectMapper().readValue(data.toString(), Comment.class);			
-			/*int id = cs.getScrollData(Comment.class).getTotalNumber().intValue();
-			Comment comment = cs.find(Comment.class, id);
-			int duration = Integer.parseInt(value.getComtime().substring(value.getComtime().lastIndexOf(":")+1))
-					- Integer.parseInt(comment.getComtime().substring(comment.getComtime().lastIndexOf(":")+1));
-			System.out.println("本次发表时间:"+Long.parseLong(value.getComtime().substring(value.getComtime().lastIndexOf(":")+1)));
-			System.out.println("上次发表时间:"+Long.parseLong(comment.getComtime().substring(comment.getComtime().lastIndexOf(":")+1)));
-			System.out.println("两次发表时间间隔为:"+duration+"s");*/			
-			cs.save(value);
-			PrintWriter writer = response.getWriter();
-			writer.write("评论成功");
-			writer.flush(); 
-			writer.close(); 
-			
-		} else { 		
-//		LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
-//		orderby.put("pubId", "desc");
+		if(pubtime!=null) { 
+//			LinkedHashMap<String, String> orderby = new LinkedHashMap<String, String>();
+//			orderby.put("pubId", "desc");
 			System.out.println("查询评论"); 
 			List<Comment> comments = new ArrayList<Comment>();
 			comments = cs.find("pubtime", pubtime);		
@@ -83,6 +67,30 @@ public class UserCommentServlet extends HttpServlet {
 			out.append("]");
 			out.flush(); 
 			out.close();
+			System.out.println("发表评论"); 
+			
+		} else if(comtime!=null) {
+			cs.delete(comtime);
+			PrintWriter writer = response.getWriter();
+			writer.write("删除成功");
+			writer.flush(); 
+			writer.close(); 
+		} else { 		
+
+//			List<Comment> comments = new ArrayList<Comment>();
+			Comment value = new ObjectMapper().readValue(data.toString(), Comment.class);			
+			/*int id = cs.getScrollData(Comment.class).getTotalNumber().intValue();
+			Comment comment = cs.find(Comment.class, id);
+			int duration = Integer.parseInt(value.getComtime().substring(value.getComtime().lastIndexOf(":")+1))
+					- Integer.parseInt(comment.getComtime().substring(comment.getComtime().lastIndexOf(":")+1));
+			System.out.println("本次发表时间:"+Long.parseLong(value.getComtime().substring(value.getComtime().lastIndexOf(":")+1)));
+			System.out.println("上次发表时间:"+Long.parseLong(comment.getComtime().substring(comment.getComtime().lastIndexOf(":")+1)));
+			System.out.println("两次发表时间间隔为:"+duration+"s");*/			
+			cs.save(value);
+			PrintWriter writer = response.getWriter();
+			writer.write("评论成功");
+			writer.flush(); 
+			writer.close(); 
 		} 
 	}
 

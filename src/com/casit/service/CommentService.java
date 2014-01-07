@@ -9,4 +9,6 @@ public interface CommentService extends DAO {
 
 	List<Comment> find(String obj, String parameter);
 
+	void delete(String comtime);
+
 }

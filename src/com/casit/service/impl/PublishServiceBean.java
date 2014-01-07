@@ -24,4 +24,10 @@ public class PublishServiceBean extends DaoSupport implements PublishService {
 		pubContents = query.getResultList();
 		return pubContents;
 	}
+	
+	public void delete(String sendtime) {
+		Query query = em.createQuery("delete from PubContent o where o.sendtime=?1");
+		query.setParameter(1, sendtime);
+		query.executeUpdate();
+	}
 }

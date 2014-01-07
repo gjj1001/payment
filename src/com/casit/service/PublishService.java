@@ -8,5 +8,7 @@ import com.casit.service.base.DAO;
 public interface PublishService extends DAO {
 
 	List<PubContent> find(String name);
+
+	void delete(String sendtime);
 	
 }

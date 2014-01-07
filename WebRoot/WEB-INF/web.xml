@@ -76,12 +76,12 @@
     <url-pattern>/UserPublishServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>userUploadImageServlet</servlet-name>
+    <servlet-name>userDeletePubServlet</servlet-name>
     <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>userUploadImageServlet</servlet-name>
-    <url-pattern>/UserUploadImageServlet</url-pattern>
+    <servlet-name>userDeletePubServlet</servlet-name>
+    <url-pattern>/UserDeletePubServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>userDownloadImageServlet</servlet-name>
@@ -109,13 +109,20 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>userCollectionServlet</servlet-name>
-    <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class> 
+    <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>userCollectionServlet</servlet-name>
     <url-pattern>/UserCollectionServlet</url-pattern>
+  </servlet-mapping>  
+  <servlet>
+    <servlet-name>userLevelServlet</servlet-name>
+    <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userLevelServlet</servlet-name>
+    <url-pattern>/UserLevelServlet</url-pattern>
   </servlet-mapping>
-  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

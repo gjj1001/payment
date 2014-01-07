@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,19 +14,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
+import com.casit.service.PublishService;
 import com.casit.util.Base64;
 
 /**
  * Servlet implementation class UserUploadImageServlet
  */
 @Component
-public class UserUploadImageServlet extends HttpServlet {
+public class UserDeletePubServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	@Resource
+	PublishService ps;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UserUploadImageServlet() {
+	public UserDeletePubServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -85,41 +90,17 @@ public class UserUploadImageServlet extends HttpServlet {
 		 * response.getWriter(); writer.write("上传图片失败"); writer.flush();
 		 * writer.close(); }
 		 */
-		String file=request.getParameter("file");
-        if(file!=null){
-			byte[] b = Base64.decode(file);
-			// String filepath = getServletContext().getRealPath("/files");
-			File upload = new File(request.getSession().getServletContext().getRealPath(File.separatorChar+"upload_image"));			
-			try {
-				if (!upload.exists()) {
-					upload.mkdirs();
-				}
-				File imagefile = new File(upload.getPath()+File.separatorChar
-						+ System.currentTimeMillis()+ ".jpg");
-				FileOutputStream fos = new FileOutputStream(imagefile);
-				System.out.println(upload.getPath());
-				System.out.println(request.getRequestURL().toString().substring(0, 
-						request.getRequestURL().toString().lastIndexOf("/")+1)+"upload_image/"+
-						imagefile.getPath().substring(imagefile.getPath().lastIndexOf(File.separator)+1));
-				fos.write(b);
-				fos.flush();
-				fos.close();				
-				response.setContentType("text/plain");
-				response.setCharacterEncoding("utf-8");
-				PrintWriter out = response.getWriter();
-				out.write("发布成功");
-				out.flush();
-				out.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-				responseInfo(response);
-			} catch(IOException e) {
-				e.printStackTrace();
-				responseInfo(response);
-			} catch(SecurityException e) {
-				e.printStackTrace();
-				responseInfo(response);
-			}
+		String sendtime=request.getParameter("sendtime");
+        if(sendtime!=null){
+			ps.delete(sendtime);
+			response.setContentType("text/plain");
+			response.setCharacterEncoding("utf-8"); 
+			PrintWriter writer = response.getWriter(); 
+			writer.write("删除成功"); 
+			writer.flush();
+			writer.close();
+        } else {
+        	responseInfo(response);
         }
         
 	}
@@ -132,7 +113,7 @@ public class UserUploadImageServlet extends HttpServlet {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-		out.write("图片上传失败");
+		out.write("网络连接失败，请稍后再试");
 		out.flush();
 		out.close();
 	}

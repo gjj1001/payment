@@ -65,5 +65,21 @@ public class UserServiceBean extends DaoSupport implements UserService {
 		UserInfo userinfo = (UserInfo)query.getSingleResult();
 		return userinfo;
 	}
+	
+	@Override
+	public void updateTp(int num, String uname) {
+		Query query = em.createQuery("update UserInfo o set o.tp=o.tp+?1 where o.username=?2");
+		query.setParameter(1, num);
+		query.setParameter(2, uname);
+		query.executeUpdate();
+	}
+	
+	@Override
+	public void updateTm(int num, String uname) {
+		Query query = em.createQuery("update UserInfo o set o.tm=o.tm+?1 where o.username=?2");
+		query.setParameter(1, num);
+		query.setParameter(2, uname);
+		query.executeUpdate();
+	}
 
 }

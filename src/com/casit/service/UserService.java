@@ -10,4 +10,6 @@ public interface UserService extends DAO {
 	public UserInfo find(String name);
 	public UserInfo queryUserById(int id);
 	public boolean isTelExist(String tel);
+	void updateTp(int num, String uname);
+	void updateTm(int num, String uname);
 }
