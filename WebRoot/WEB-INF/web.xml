@@ -114,7 +114,7 @@
   <servlet-mapping>
     <servlet-name>userCollectionServlet</servlet-name>
     <url-pattern>/UserCollectionServlet</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
   <servlet>
     <servlet-name>userLevelServlet</servlet-name>
     <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class>
@@ -122,6 +122,62 @@
   <servlet-mapping>
     <servlet-name>userLevelServlet</servlet-name>
     <url-pattern>/UserLevelServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>checkNewPubContentServlet</servlet-name>
+    <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkNewPubContentServlet</servlet-name>
+    <url-pattern>/CheckNewPubContentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>userReplyServlet</servlet-name>
+    <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userReplyServlet</servlet-name>
+    <url-pattern>/UserReplyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>userObserverServlet</servlet-name>
+    <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userObserverServlet</servlet-name>
+    <url-pattern>/UserObserverServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>userNotifyFansServlet</servlet-name>
+    <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userNotifyFansServlet</servlet-name>
+    <url-pattern>/UserNotifyFansServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>userMessageServlet</servlet-name>
+    <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userMessageServlet</servlet-name>
+    <url-pattern>/UserMessageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>userConversationServlet</servlet-name>
+    <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userConversationServlet</servlet-name>
+    <url-pattern>/UserConversationServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>userConTextServlet</servlet-name>
+    <servlet-class>com.casit.tee686.servlet.DelegatingServletProxy</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userConTextServlet</servlet-name>
+    <url-pattern>/UserConTextServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

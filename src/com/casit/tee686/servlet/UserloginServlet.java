@@ -35,8 +35,8 @@ public class UserloginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String name = new String(request.getParameter("uname").getBytes("iso-8859-1"),"utf-8");
 		String pwd = new String(request.getParameter("pwd").getBytes("iso-8859-1"),"utf-8");
-		System.out.println("username="+name+"\npassword="+pwd);		
-		if(us.isUserExist(name)&&us.isPwdExit(pwd)) {
+		System.out.println("username="+name+" password="+pwd);		
+		if(us.isUserExist(name, pwd)) {
 			StringBuilder builder = new StringBuilder();
 			builder.append("{\"isErr\":\"no\",\"key\":\"success\"}");
 			response.setContentType("text/plain");

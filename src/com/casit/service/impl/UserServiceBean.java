@@ -13,28 +13,49 @@ import com.casit.service.base.DaoSupport;
 public class UserServiceBean extends DaoSupport implements UserService {
 	private String uname;
 	private String mobile;
+	private String password;
 	
 	@Override
-	public boolean isUserExist(String name) {		
-		Query query = em.createNativeQuery("select username from userinfo where username="+"\""+name+"\"");
+	public boolean isUserExist(String name, String pwd) {	
+		Query query = em.createQuery("select o from UserInfo o where o.username=?1");
+		query.setParameter(1, name);
 		try{
+			UserInfo user = (UserInfo)query.getSingleResult();
+			uname = user.getUsername();
+			password = user.getPwd();
+			System.out.println("uname:"+uname+" password:"+password);
+		} catch(NoResultException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return name.equals(uname)?(pwd.equals(password)?true:false):false;
+		
+	}
+
+	@Override
+	public boolean isUserExist(String name) {
+		Query query = em.createNativeQuery("select username from userinfo where username="+"\""+name+"\"");
+		try {
 			uname = (String)query.getSingleResult();
+			System.out.println(uname);
 		} catch(NoResultException e) {
 			e.printStackTrace();
 			return false;
 		}
 		return name.equals(uname);
-		
 	}
-
+	
 	@Override
 	public boolean isPwdExit(String pwd) {
-		Query query = em.createNativeQuery("select pwd from userinfo where pwd="+pwd);
-		String password = (String)query.getSingleResult();
-		if(pwd.equals(password)) {
-			return true;
+		Query query = em.createNativeQuery("select pwd from userinfo where pwd="+"\""+pwd+"\"");
+		try {
+			password = (String)query.getSingleResult();
+			System.out.println(password);
+		} catch(NoResultException e) {
+			e.printStackTrace();
+			return false;
 		}
-		return false;
+		return pwd.equals(password);
 	}
 	
 	@Override

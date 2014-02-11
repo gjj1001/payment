@@ -3,7 +3,6 @@ package junit.test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -11,10 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Query;
-
-import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,10 +17,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.casit.bean.entity.Comment;
+import com.casit.bean.entity.Message;
 import com.casit.bean.entity.PayOrder;
 import com.casit.bean.entity.UserInfo;
 import com.casit.service.CollectionService;
 import com.casit.service.CommentService;
+import com.casit.service.MessageService;
 import com.casit.service.OrderService;
 import com.casit.service.UserService;
 
@@ -36,6 +33,7 @@ public class OrderTest {
 	private static UserService us;
 	private static CommentService cs;
 	private static CollectionService cols;
+	private static MessageService ms;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -44,6 +42,7 @@ public class OrderTest {
 		us = (UserService) cxt.getBean("userServiceBean");
 		cs = (CommentService) cxt.getBean("commentServiceBean");
 		cols = (CollectionService) cxt.getBean("collectionServiceBean");
+		ms = (MessageService) cxt.getBean("messageServiceBean");
 	}
 
 	@Test
@@ -116,14 +115,14 @@ public class OrderTest {
 	@Test
 	public void testCreate() {
 		us.save(new UserInfo("+8615680557316", "高", "123", "MAN",
-				"19841001", "四川", "成都", "20131018", "QQ"));
+				"19841001", "四川", "成都", "20131018", "QQ",""));
 	}
 	
 	@Test
 	public void testFind() {
 		List<Comment> comments = new ArrayList<Comment>();
 //		comments = cs.find("content", "好");
-		comments = cs.find("pubtime", "2013-12-26,11:46:32");
+		comments = cs.find("pubtime", "2014-01-10,09:39:27");
 		System.out.println(comments.size());
 		
 		for(int i=0; i<comments.size(); i++) {
@@ -135,5 +134,18 @@ public class OrderTest {
 	@Test
 	public void deleteCollection() {
 		cols.delete("2013-12-27,11:42:10");
+	}
+	
+	@Test
+	public void comSave() {
+		Comment comment = new Comment();
+		cs.save(comment);
+	}
+	
+	@Test
+	public void findMessages() {
+		for(Message message : ms.find("士力加", "gao")) {
+			System.out.println(message.getSend_person());
+		}
 	}
 }

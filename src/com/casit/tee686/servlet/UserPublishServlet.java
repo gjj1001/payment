@@ -27,7 +27,6 @@ import com.casit.util.Base64;
 @Component
 public class UserPublishServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String file;   
 	private PubContent pubContent;
 	@Resource
 	PublishService ps;
@@ -90,7 +89,7 @@ public class UserPublishServlet extends HttpServlet {
 				pubContent.setImageFile(uploadImage);				
 				ps.update(pubContent);
 				PrintWriter wirter = response.getWriter();
-				wirter.write("发布成功");
+				wirter.write(uploadImage);
 				wirter.flush();
 				wirter.close();
 			} catch (FileNotFoundException e) {

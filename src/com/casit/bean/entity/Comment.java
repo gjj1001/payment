@@ -17,8 +17,12 @@ public class Comment implements Serializable {
 	private static final long serialVersionUID = -2036558711450165178L;
 	private Integer comid;
 	private String headimage;
-	private String content;
+	private String imagefile;
+	private String comContent;
+	private String pubContent;
 	private String username;
+	private String author;
+	private String reply;
 	private String pubtime;
 	private String comtime;
 	
@@ -36,13 +40,7 @@ public class Comment implements Serializable {
 	public void setHeadimage(String headimage) {
 		this.headimage = headimage;
 	}
-	@Column(nullable=false)
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
+	
 	@Column(length=10)
 	public String getUsername() {
 		return username;
@@ -63,6 +61,41 @@ public class Comment implements Serializable {
 	}
 	public void setComtime(String comtime) {
 		this.comtime = comtime;
+	}
+	@Column(length=10)
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+	@Column
+	public String getImagefile() {
+		return imagefile;
+	}
+	public void setImagefile(String imagefile) {
+		this.imagefile = imagefile;
+	}
+	@Column
+	public String getComContent() {
+		return comContent;
+	}
+	public void setComContent(String comContent) {
+		this.comContent = comContent;
+	}
+	@Column
+	public String getPubContent() {
+		return pubContent;
+	}
+	public void setPubContent(String pubContent) {
+		this.pubContent = pubContent;
+	}
+	@Column(length=10)
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	

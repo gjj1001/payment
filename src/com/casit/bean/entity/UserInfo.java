@@ -1,18 +1,11 @@
 package com.casit.bean.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class UserInfo implements Serializable{
@@ -31,7 +24,7 @@ public class UserInfo implements Serializable{
 	private Integer tp = 0; //功勋值
 	private Integer userid;
 	private String regtime; //注册时间
-//	private String head_image_url;//头像地址
+	private String headimgurl;//头像地址
 	private String platform;//第三方登陆平台
 	/*private Set<UserInfo> friends = new HashSet<UserInfo>();
 	private UserInfo myself;
@@ -40,7 +33,8 @@ public class UserInfo implements Serializable{
 	private boolean vender;//厂商
 */	
 	public UserInfo(String mobile, String username, String pwd, String sex,
-			String birthday, String province, String city, String regtime, String platform) {
+			String birthday, String province, String city, String regtime, 
+			String platform, String headimgurl) {
 		super();
 		this.mobile = mobile;
 		this.username = username;
@@ -51,6 +45,7 @@ public class UserInfo implements Serializable{
 		this.city = city;
 		this.regtime = regtime;		
 		this.platform = platform;
+		this.headimgurl = headimgurl;
 	}
 	
 	
@@ -68,13 +63,13 @@ public class UserInfo implements Serializable{
 	}*/
 
 
-	/*@Column
-	public String getHead_image_url() {
-		return head_image_url;
+	@Column
+	public String getHeadimgurl() {
+		return headimgurl;
 	}
-	public void setHead_image_url(String head_image_url) {
-		this.head_image_url = head_image_url;
-	}*/
+	public void setHeadimgurl(String headimgurl) {
+		this.headimgurl = headimgurl;
+	}
 
 	/*@OneToMany(cascade={CascadeType.REFRESH, CascadeType.REMOVE}, mappedBy="myself")
 	public Set<UserInfo> getFriends() {
